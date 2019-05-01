@@ -22,11 +22,11 @@ config.img_height = 224
 config.epochs = 10
 config.batch_size = 128
 
-def setup_to_transfer_learn(model, base_model):
+def setup_to_transfer_learn(model, base_model): #make all layers not trainable in base model
     """Freeze all layers and compile the model"""
     for layer in base_model.layers:
         layer.trainable = False
-    optimizer = Adam(lr=0.0001,
+    optimizer = Adam(lr=0.0001, # want a lower learning rate for base model in transfer learning
                      beta_1=0.9,
                      beta_2=0.999,
                      epsilon=None,
@@ -56,7 +56,7 @@ train_generator, validation_generator = generators(preprocess_input, config.img_
 # setup model
 base_model = DenseNet121(input_shape=(config.img_width, config.img_height, 3),
                          weights='imagenet',
-                         include_top=False,
+                         include_top=False, # doesnt include the last layer important
                          pooling='avg')
 
 model = add_new_last_layer(base_model, nb_classes)
