@@ -10,11 +10,12 @@ from wandb.keras import WandbCallback
 import wandb
 
 run = wandb.init()
+# hyper parameters
 config = run.config
-config.optimizer = "adam"
+config.optimizer = "adam" #keras.io
 config.epochs = 50
 config.dropout = 10
-config.hidden_nodes = 100
+config.hidden_nodes = 100 #size of hidden layer
 
 # load data
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -36,9 +37,11 @@ num_classes = y_train.shape[1]
 
 # create model
 model = Sequential()
-model.add(Flatten(input_shape=(img_width, img_height)))
-model.add(Dense(config.hidden_nodes, activation='relu'))
-model.add(Dense(num_classes, activation='softmax'))
+model.add(Flatten(input_shape=(img_width, img_height))) #100 nodes
+# model.add(Dense(120, activation='relu')) to add morelayers
+# model.add(Dense(120, activation='relu')) to add more layers and comment out next line with config.hidden
+model.add(Dense(config.hidden_nodes, activation='relu')) #hidden layers
+model.add(Dense(num_classes, activation='softmax')) #last layer
 model.compile(loss='categorical_crossentropy', optimizer=config.optimizer,
               metrics=['accuracy'])
 
