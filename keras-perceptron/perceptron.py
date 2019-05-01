@@ -24,7 +24,7 @@ num_classes = y_train.shape[1]
 # create model
 model = Sequential()
 model.add(Flatten(input_shape=(img_width, img_height)))
-model.add(Dense(num_classes, activation='softmax'))
+model.add(Dense(num_classes, activation='softmax')) #softmax is specific type of sigmoid. all outputs add up to 1
 model.compile(loss='categorical_crossentropy', optimizer='adam',
               metrics=['accuracy'])
 

@@ -16,6 +16,7 @@ img_width = X_train.shape[1]
 img_height = X_train.shape[2]
 
 # normalize data
+# keras initializes network 0 to 1 
 X_train = X_train.astype('float32') / 255.
 X_test = X_test.astype('float32') / 255.
 
