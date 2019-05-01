@@ -22,12 +22,12 @@ img_height = X_train.shape[2]
 # create model # first shallow learning model
 model = Sequential()
 model.add(Flatten(input_shape=(img_width, img_height))) # add intitial flattened layer. takes the 2D 28 by 28 pixels and turns it into 784 lenght array
-model.add(Dense(1)) # dense bc densely connected to previous layer. every input has learned weight from inputs of previously layer. 1 is because we want 1 output. if 2 it would output 2 numbers. so this is a single perceptron. so 1 means you are ouputting the 'schematic of rosenblatts perceptron
+model.add(Dense(1,activation="sigmoid")) # dense bc densely connected to previous layer. every input has learned weight from inputs of previously layer. 1 is because we want 1 output. if 2 it would output 2 numbers. so this is a single perceptron. so 1 means you are ouputting the 'schematic of rosenblatts perceptron
 # shape of data after dense 1 is just 1 
 model.compile(loss='mse', optimizer='adam',
               metrics=['accuracy'])
 
 # Fit the model
-model.fit(X_train, is_five_train, epochs=3, validation_data=(X_test, is_five_test),
+model.fit(X_train, is_five_train, epochs=6, validation_data=(X_test, is_five_test),
           callbacks=[WandbCallback(data_type="image", labels=labels, save_model=False)])
-model.save('perceptron.h5')
+model.save('perceptron.h5') # saves weights so it can then be used for inference 

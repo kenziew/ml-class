@@ -17,6 +17,7 @@ img_height = X_train.shape[2]
 
 # one hot encode outputs
 y_train = to_categorical(y_train)
+#shape of y_train after will be 600000 by 10. so converts 600000 to 600000 by 10
 y_test = to_categorical(y_test)
 labels = range(10)
 
@@ -24,8 +25,8 @@ num_classes = y_train.shape[1]
 
 # create model
 model = Sequential()
-model.add(Flatten(input_shape=(img_width, img_height)))
-model.add(Dense(num_classes))
+model.add(Flatten(input_shape=(img_width, img_height))) #model learns 7850 weights as it trains. each perceptron has bias term and each one has 784 weights
+model.add(Dense(num_classes, activation="sigmoid")) # saying dense layer with 10 perceptrons. so output will be 10 numbers. 
 model.compile(loss='mse', optimizer='adam',
               metrics=['accuracy'])
 
