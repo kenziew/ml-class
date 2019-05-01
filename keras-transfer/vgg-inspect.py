@@ -15,7 +15,7 @@ def VGG_16(weights_path=None):
     model.add(ZeroPadding2D((1,1),input_shape=(3,224,224)))
     model.add(Convolution2D(64, 3, 3, activation='relu'))
     model.add(ZeroPadding2D((1,1)))
-    model.add(Convolution2D(64, 3, 3, activation='relu'))
+    model.add(Convolution2D(64, 3, 3, activation='relu')) # stacked convolutions
     model.add(MaxPooling2D((2,2), strides=(2,2)))
 
     model.add(ZeroPadding2D((1,1)))
@@ -76,3 +76,6 @@ if __name__ == "__main__":
         model.compile(optimizer=sgd, loss='categorical_crossentropy')
         out = model.predict(im)
         print(np.argmax(out))
+
+        
+# 138 million parameters
